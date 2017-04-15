@@ -58,4 +58,35 @@ function addBasicCard(){
          }); 
 }//end of addBasicCard function
 
+//create Cloze Flash Card
+function addClozeCard(){
+  return inquirer.prompt([
+              {
+                  type: "input",
+                  name: "text",
+                  message: "What is the full statement of question would you like to put on the card?"
+              },
+              {
+                  type: "input",
+                  name: "cloze",
+                  message: "What is the word(s) would you like to cloze on the card?"
+              },
+              {
+                  type: "input",
+                  name: "partial",
+                  message: "Please type in the partial statement of question except the word(s) you would like to ommit. " + 
+                           "(example  _____ was the first president of the USA.)"
+              }
+     ])
+     .then(function(clozeCard) {
+             storeClozeCard = new ClozeCard(clozeCard.text, clozeCard.cloze, clozeCard.partial);
+                 console.log(storeClozeCard);
+
+             fs.appendFile(dataTxt, JSON.stringify(storeClozeCard) + "\r\n\r\n" , function(err) {
+                 if (err) {
+                     console.log(err);
+                 }
+             });
+     });
+}//end of addClozeCard function
 
