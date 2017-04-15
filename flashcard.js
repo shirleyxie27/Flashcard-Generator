@@ -17,3 +17,18 @@ function ClozeCard(text, cloze, partial){
     this.partial = partial;
 }//end of ClozeCard constructor
 
+//user choose cardType (basic or cloze)
+inquirer.prompt({
+    type: "list",
+    name: "cardType",
+    message: "What type of card would you like to create?",
+    choices: ["Basic-FlashCard", "Cloze-FlashCard"]
+}).then(function (answer) {
+    if(answer.cardType === "Basic-FlashCard"){
+        addBasicCard();
+    }
+    else{
+        addClozeCard();
+    }       
+}); //end of inquirer.prompt
+
